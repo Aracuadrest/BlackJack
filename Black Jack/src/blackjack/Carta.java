@@ -12,7 +12,7 @@ public class Carta {
 	public Carta(Palo palo, int numero) {
 		super();
 		this.palo = palo;
-		if (numero>1 && numero<=13)
+		if (numero>=1 && numero<=13)
 				this.numero = numero;
 	}
 
@@ -46,7 +46,7 @@ public class Carta {
 	//Sobreescribe el método toString para que muestre la carta de la siguiente manera [ numero – Palo]. Por ejemplo, [3 – CORAZONES]
 	@Override
 	public String toString() {
-		return "[" + this.numero + " - " + this.palo + "]";
+		return "[" + this.mostrarNumero() + " - " + this.palo + "]";
 	}
 	
 }
