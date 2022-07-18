@@ -10,6 +10,7 @@ public class Mano extends Mazo {
 		this.cartas = new ArrayList();
 		
 	}
+	
 
 	//Método valorMano, calcula el valor de la mano que tenemos
 	//Recorremos la lista y sumamos los valores
@@ -17,6 +18,19 @@ public class Mano extends Mazo {
 		int suma=0;
 		for (Carta carta : cartas) {
 			suma = suma + carta.getValor();
+		}
+		return suma;
+	}
+	
+	// Metodo para las cartas visibles y no visibles
+	
+	public int valorManoVisibles() {
+		int suma=0;
+		for (Carta carta : cartas) {
+			if(carta.isVisible()) {
+				suma = suma + carta.getValor();	
+			}
+	
 		}
 		return suma;
 	}
@@ -34,7 +48,8 @@ public class Mano extends Mazo {
 
 	@Override
 	public String toString() {
-		return "Valor de la mano: " + valorMano() + "\n" + super.toString();
+			return "Valor de la mano: " + valorManoVisibles() + "\n" + super.toString();
+		
 	}
 	
 	// Metodo pedirCarta al que se le pasa un mazo y solicita una carta y la
@@ -43,6 +58,22 @@ public class Mano extends Mazo {
 		if (!finDejuego()) {
 		Carta c = m.solicitarCarta();
 		this.cartas.add(c);
+		}
+	}
+	// Metodo para sacar dos cartas
+	public void pedirCarta(Mazo m, boolean visible) {
+		if (!finDejuego()) {
+		Carta c = m.solicitarCarta();
+		c.setVisible(visible);
+		this.cartas.add(c);
+		}
+	}
+	
+	// Método para descubrir todas las cartas haciendolas visibles a todas.
+	
+	public void descubrir() {
+		for (Carta carta : cartas) {
+			carta.setVisible(true);
 		}
 	}
 	

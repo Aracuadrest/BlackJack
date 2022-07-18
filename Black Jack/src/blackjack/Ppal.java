@@ -3,17 +3,34 @@ package blackjack;
 import java.util.Scanner;
 
 public class Ppal {
+	
+	private static Mazo mazo;
+	private static Mano jugador;
+	private static Mano banca;
 
 	public static void main(String[] args) {
 		
 		Mazo mazo = new Mazo();
 		Mano jugador = new Mano();
+		Mano banca = new Mano();
 		
 		System.out.println("-----------------------");
 		System.out.println("  Barajando cartas...");
 		System.out.println("-----------------------");
 		mazo.barajar();
 		
+		System.out.println("  Repartiendo cartas...");
+		
+		
+		jugador.pedirCarta(mazo);
+		banca.pedirCarta(mazo);
+		jugador.pedirCarta(mazo);
+		banca.pedirCarta(mazo, false);
+		
+		System.out.println("Las cartas de la banca: "+banca);
+		System.out.println("Las cartas del jugador: "+jugador);
+		
+				
 		Scanner entrada = new Scanner(System.in);
 		int opcion;
 		do {
@@ -34,11 +51,14 @@ public class Ppal {
 			System.out.println("Te has plantado con "+jugador.valorMano());
 		}*/
 		
-		Mano banca = new Mano();
+		
 		System.out.println("-----------------------");
 		System.out.println("   Juega la banca...");
 		System.out.println("-----------------------");
 		
+		banca.descubrir();
+		System.out.println("Las cartas de la banca: "+banca);
+
 		if (jugador.valorMano()>21) {
 			System.out.println("La banca gana");
 		}else {

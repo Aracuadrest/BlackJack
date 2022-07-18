@@ -4,17 +4,33 @@ public class Carta {
 	//creacion de enum para el palo de la carta
 	enum Palo{TREBOL,DIAMANTES,CORAZONES,PICAS};
 	
+	
 	//declaracion de atributos;
 	private Palo palo;
 	private int numero;
+	private boolean visible;
 	
 	//Constructor parametrizado al que le pases el numero y el palo, y asigne los valores. El número deberá estar entre 1 y 13.
 	public Carta(Palo palo, int numero) {
 		super();
 		this.palo = palo;
-		if (numero>=1 && numero<=13)
-				this.numero = numero;
+		if (numero>=1 && numero<=13) {
+			this.numero = numero;
+		}
+		this.visible=true;
+				
 	}
+	
+	public Carta(Palo palo, int numero, boolean visible) {
+		super();
+		this.palo = palo;
+		if (numero>=1 && numero<=13) {
+			this.numero = numero;
+		}
+		this.visible = visible;
+	}
+
+
 
 	//Métodos getters de los atributos de las cartas. No crear lo setters
 	public Palo getPalo() {
@@ -25,6 +41,14 @@ public class Carta {
 		return numero;
 	}
 	
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
 	//Método getValor que devuelve el valor que tiene cada carta en el BlackJack. Los valores serán: 11 para el AS (1), 10 para las figuras (J,Q,K o 11, 12 y 13) y el valor correspondiente para el resto de las cartas (2, 3, 4, 5, 6, 7, 8, 9)
 	public int getValor() {
 		if (this.numero ==1)
@@ -46,7 +70,10 @@ public class Carta {
 	//Sobreescribe el método toString para que muestre la carta de la siguiente manera [ numero – Palo]. Por ejemplo, [3 – CORAZONES]
 	@Override
 	public String toString() {
+		if (this.visible) {
 		return "[" + this.mostrarNumero() + " - " + this.palo + "]";
+		}
+		return "[ Carta no visible ]";
 	}
 	
 }
