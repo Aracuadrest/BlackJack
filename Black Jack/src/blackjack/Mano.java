@@ -2,6 +2,9 @@ package blackjack;
 
 import java.util.ArrayList;
 
+import exceptions.SeHaPasadoException;
+import exceptions.TieneBlackJackExceptio;
+
 public class Mano extends Mazo {
 	
 	//Constructor sin nada vacio
@@ -54,11 +57,18 @@ public class Mano extends Mazo {
 	
 	// Metodo pedirCarta al que se le pasa un mazo y solicita una carta y la
 	// incluye si no se ha llegado al fin de juego
-	public void pedirCarta(Mazo m) {
-		if (!finDejuego()) {
+	public void pedirCarta(Mazo m) throws SeHaPasadoException, TieneBlackJackExceptio {
+		if (valorMano()>21) {
+			throw new SeHaPasadoException("Se ha pasado");
+		}
+		if(valorMano()==21) {
+			throw new TieneBlackJackExceptio("BlackJack");
+		}
+		
 		Carta c = m.solicitarCarta();
 		this.cartas.add(c);
-		}
+		
+		
 	}
 	// Metodo para sacar dos cartas
 	public void pedirCarta(Mazo m, boolean visible) {

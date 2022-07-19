@@ -2,6 +2,9 @@ package blackjack;
 
 import java.util.Scanner;
 
+import exceptions.SeHaPasadoException;
+import exceptions.TieneBlackJackExceptio;
+
 public class Ppal {
 	
 	private static Mazo mazo;
@@ -22,10 +25,17 @@ public class Ppal {
 		System.out.println("  Repartiendo cartas...");
 		
 		
-		jugador.pedirCarta(mazo);
-		banca.pedirCarta(mazo);
-		jugador.pedirCarta(mazo);
-		banca.pedirCarta(mazo, false);
+		try {
+			jugador.pedirCarta(mazo);
+			banca.pedirCarta(mazo);
+			jugador.pedirCarta(mazo);
+			banca.pedirCarta(mazo, false);
+		} catch (SeHaPasadoException | TieneBlackJackExceptio e) {
+			
+			
+		}
+		
+		
 		
 		System.out.println("Las cartas de la banca: "+banca);
 		System.out.println("Las cartas del jugador: "+jugador);
@@ -37,7 +47,11 @@ public class Ppal {
 		System.out.println("¿Quieres carta? 1.si 0.no");
 		opcion = entrada.nextInt();
 		if (opcion ==1) {
-			jugador.pedirCarta(mazo);
+			try {
+				jugador.pedirCarta(mazo);
+			} catch (SeHaPasadoException | TieneBlackJackExceptio e) {
+			
+			}
 			System.out.println("Tienes en tu mano \n"+jugador);
 		}
 		
@@ -64,7 +78,15 @@ public class Ppal {
 		}else {
 			do {
 				System.out.println("Pidiendo carta");
-				banca.pedirCarta(mazo);
+				try {
+					banca.pedirCarta(mazo);
+				} catch (SeHaPasadoException e) {
+					// TODO Bloque catch generado automáticamente
+					e.printStackTrace();
+				} catch (TieneBlackJackExceptio e) {
+					// TODO Bloque catch generado automáticamente
+					e.printStackTrace();
+				}
 				System.out.println(banca);
 				}while ( banca.valorMano()<=16);
 				
